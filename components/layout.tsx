@@ -2,24 +2,28 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const name = 'yaojie'
-export const siteTitle = 'Lim Yao Jie'
+const name = 'Lim Yao Jie'
 
 export default function Layout({
   children,
-  home
+  home,
+  title = 'Lim Yao Jie',
+  description = "Portfolio",
 }: {
   children: React.ReactNode
-  home?: boolean
+  home?: boolean,
+  title?: string,
+  description?: string
 }) {
   return (
     <div className="container w-full md:max-w-3xl mx-auto pt-20 px-2">
       <Head>
         {/* <link rel="icon" href="/favicon.ico" /> */}
-        <meta name="og:title" content={siteTitle} />
-        <meta name="description" content="yaojie's portfolio" />
+        <meta name="og:title" content={title} />
+        <meta name="description" content={description} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{title}</title>
       </Head>
       <header>
         {home ? (

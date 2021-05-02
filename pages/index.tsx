@@ -2,15 +2,12 @@ import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import Tag from '../components/tag'
-import Layout, { siteTitle } from '../components/layout'
+import Layout from '../components/layout'
 import styles from './index.module.scss'
 
 export default function Home() {
   return (
     <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
       <section className="mt-1 mb-3">
         <p>Software Engineer doing Ruby on Rails, Javascript, some DevOps</p>
         <p>Fiddling with custom mechanical keyboards and gardening!</p>

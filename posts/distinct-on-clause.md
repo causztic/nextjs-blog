@@ -7,7 +7,6 @@ status: publish
 categories: []
 tags: ["code", "rails"]
 ---
-
 I needed to write an API for **direct_messages#index**, which returns the latest **direct_message** per sender, and it has to be paginated.
 
 The first idea was to approach this with a DISTINCT ON clause, something like:

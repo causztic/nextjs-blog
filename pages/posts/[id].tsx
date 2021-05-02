@@ -37,7 +37,7 @@ const components: any = {
 
 export default function Post({ postData }) {
   return (
-    <Layout>
+    <Layout title={postData.title} description={postData.content.split("\n")[0]}>
       <article>
         <h1 className="font-bold font-sans text-gray-900">{postData.title}</h1>
         <section className="post-date text-sm text-gray-600">{postData.date}</section>
