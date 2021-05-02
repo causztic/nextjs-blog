@@ -1,7 +1,8 @@
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
+import Link from 'next/Link'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import styles from './post.module.scss'
@@ -38,7 +39,7 @@ const components: any = {
 export default function Post({ postData }) {
   return (
     <Layout title={postData.title} description={postData.content.split("\n")[0]}>
-      <article>
+      <article className="mb-6">
         <h1 className="font-bold font-sans text-gray-900">{postData.title}</h1>
         <section className="post-date text-sm text-gray-600">{postData.date}</section>
         <hr className="my-4" />
@@ -48,6 +49,9 @@ export default function Post({ postData }) {
           </ReactMarkdown>
         </section>
       </article>
+      <Link href="/posts">
+        <a className="underline text-blue-400">Read my other posts</a>
+      </Link>
     </Layout>
   )
 }

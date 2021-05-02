@@ -29,7 +29,7 @@ export default function Layout({
         <meta property="og:image" content="https://www.causztic.com/images/profile.jpg" />
 
         <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
+        <meta property="og:description" content={description} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://www.causztic.com/" />
         <meta property="twitter:image" content="https://www.causztic.com/images/profile.jpg" />
@@ -72,11 +72,26 @@ export default function Layout({
       </header>
       <main className="mt-2">{children}</main>
       {!home && (
-        <div className="my-4">
-          <Link href="/">
-            <a className="underline text-blue-400">← Back to home</a>
-          </Link>
-        </div>
+        <footer className="my-4">
+          <section className="mt-3">
+            <a href="https://www.github.com/causztic" target="_blank" rel="noreferrer noopener" className="mr-2">
+              <Image
+                src="/images/github-icon.png"
+                height={64}
+                width={64}
+                alt='github'
+              />
+            </a>
+            <a href="https://www.linkedin.com/in/limyaojie">
+              <Image
+                src="/images/linkedin-icon.png"
+                height={64}
+                width={64}
+                alt='linkedin'
+              />
+            </a>
+          </section>
+        </footer>
       )}
     </div>
   )

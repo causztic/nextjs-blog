@@ -14,7 +14,7 @@ export default function Home() {
       </section>
       <section>
         <Link href="/posts">
-          <a className="text-2xl text-underline text-blue-400">Posts</a>
+          <a className="text-2xl underline text-blue-400">Posts</a>
         </Link>
       </section>
       <hr className="my-4" />

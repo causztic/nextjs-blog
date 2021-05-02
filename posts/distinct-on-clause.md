@@ -79,6 +79,4 @@ To check that the query is expected, lets run **explain** on it:
 
 This shows that the query will indeed only run once, while also preserving the pagination.
 
-The query return was what I wanted:
-
-one latest message per sender, sorted by the messages' created_at date with the latest one first.
+The query return was what I wanted: one latest message per sender, sorted by the messages' created_at.
