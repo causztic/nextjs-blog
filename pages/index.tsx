@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Layout home>
       <section className="mt-1 mb-3">
-        <p>Software Engineer doing Ruby on Rails, Javascript, some DevOps</p>
+        <p>Software Engineer doing Ruby on Rails, Javascript and some DevOps</p>
         <p>Fiddling with custom mechanical keyboards and gardening!</p>
       </section>
       <section>

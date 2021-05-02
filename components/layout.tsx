@@ -8,7 +8,7 @@ export default function Layout({
   children,
   home,
   title = 'Lim Yao Jie',
-  description = "Portfolio",
+  description = "Software Engineer doing Ruby on Rails, Javascript, and some DevOps",
 }: {
   children: React.ReactNode
   home?: boolean,
