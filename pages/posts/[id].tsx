@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   }
 }
 
-const components = {
+const components: any = {
   code({node, inline, className, children, ...props}) {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
