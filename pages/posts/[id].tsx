@@ -14,7 +14,6 @@ import styles from './post.module.scss'
 type Params = { id: string }
 export async function getStaticProps({ params }: { params: Params }): Promise<GetStaticPropsResult<PostData>> {
   const postData = await getPostData(params.id)
-  console.log(postData);
   return {
     props: postData
   }
