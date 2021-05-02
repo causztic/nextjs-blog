@@ -14,7 +14,7 @@ export default function Layout({
   home?: boolean,
   title?: string,
   description?: string
-}) {
+}): JSX.Element {
   return (
     <div className="container w-full md:max-w-3xl mx-auto pt-20 px-2">
       <Head>

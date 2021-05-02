@@ -1,21 +1,20 @@
+import { GetStaticPropsResult } from 'next'
 import Link from 'next/link'
 import Layout from '../../components/layout'
 import { formatDate } from '../../lib/date'
-import { getSortedPostsData } from '../../lib/posts'
+import { getSortedPostsData, PostData } from '../../lib/posts'
 
-export async function getStaticProps() {
+export async function getStaticProps(): Promise<GetStaticPropsResult<PostData[]>> {
   const allPostsData = getSortedPostsData()
   return {
-    props: {
-      allPostsData
-    }
+    props: allPostsData
   }
 }
 
-export default function Posts({ allPostsData }) {
+export default function Posts(data: PostData[]): JSX.Element {
   return <Layout>
     <ul>
-      {allPostsData.map(({ id, date, title }) => (
+      {data.map(({ id, date, title }) => (
         <li key={id} className='mb-4'>
           <Link href={`/posts/${id}`}>
             <a>

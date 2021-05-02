@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import Link from 'next/link'
 import Image from 'next/image'
 import Tag from '../components/tag'
 import Layout from '../components/layout'
 import styles from './index.module.scss'
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <Layout home>
       <section className="mt-1 mb-3">
