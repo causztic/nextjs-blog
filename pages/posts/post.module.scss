@@ -1,0 +1,13 @@
+.postContent {
+  a {
+    @apply underline;
+    @apply text-blue-400;
+  }
+  ol {
+    @apply list-decimal;
+    @apply py-4;
+  }
+  li {
+    @apply mb-2;
+  }
+}

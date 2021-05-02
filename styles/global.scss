@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-size: 18px;
+  }
+  h1 {
+    @apply text-3xl;
+  }
+  h2 {
+    @apply text-2xl;
+  }
+  h3 {
+    @apply text-xl;
+  }
+
+  pre {
+    @apply overflow-auto;
+    @apply bg-gray-900;
+    @apply rounded;
+    @apply text-white;
+    @apply font-mono;
+    @apply p-2;
+    @apply mt-2;
+    @apply mb-4;
+  }
+
+  pre code {
+    @apply whitespace-pre;
+  }
+}
