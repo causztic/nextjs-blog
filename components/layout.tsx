@@ -29,7 +29,7 @@ export default function Layout({
         <meta property="og:image" content="https://www.causztic.com/images/profile.jpg" />
 
         <meta property="twitter:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="twitter:description" content={description} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://www.causztic.com/" />
         <meta property="twitter:image" content="https://www.causztic.com/images/profile.jpg" />
