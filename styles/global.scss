@@ -15,18 +15,6 @@
   h3 {
     @apply text-xl;
   }
-
-  pre {
-    @apply overflow-auto;
-    @apply bg-gray-900;
-    @apply rounded;
-    @apply text-white;
-    @apply font-mono;
-    @apply p-2;
-    @apply mt-2;
-    @apply mb-4;
-  }
-
   pre code {
     @apply whitespace-pre;
   }

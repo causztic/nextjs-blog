@@ -1,6 +1,6 @@
-// import ReactMarkdown from 'react-markdown'
-// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-// import { docco } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
@@ -23,17 +23,16 @@ export async function getStaticPaths() {
   }
 }
 
-// const components = {
-//   code({node, inline, className, children, ...props}) {
-//     const match = /language-(\w+)/.exec(className || '')
-//     console.log(node, inline, match, className, children);
-//     return !inline && match ? (
-//       <SyntaxHighlighter style={docco} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
-//     ) : (
-//       <code className={className} {...props} />
-//     )
-//   }
-// }
+const components = {
+  code({node, inline, className, children, ...props}) {
+    const match = /language-(\w+)/.exec(className || '')
+    return !inline && match ? (
+      <SyntaxHighlighter style={docco} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+    ) : (
+      <code className={className} {...props} />
+    )
+  }
+}
 
 
 export default function Post({ postData }) {
@@ -44,7 +43,9 @@ export default function Post({ postData }) {
         <section className="post-date text-sm text-gray-600">{postData.date}</section>
         <hr className="my-4" />
         <section className={styles.postContent}>
-          <div dangerouslySetInnerHTML={{__html: postData.contentHtml }} />
+          <ReactMarkdown components={components}>
+            {postData.content}
+          </ReactMarkdown>
         </section>
       </article>
     </Layout>

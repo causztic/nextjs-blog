@@ -16,7 +16,7 @@ export default function Posts({ allPostsData }) {
   return <Layout>
     <ul>
       {allPostsData.map(({ id, date, title }) => (
-        <li key={id}>
+        <li key={id} className='mb-4'>
           <Link href={`/posts/${id}`}>
             <a>
               <h2 className="font-bold font-sans text-gray-900">{title}</h2>

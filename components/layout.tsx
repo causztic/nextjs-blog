@@ -15,7 +15,7 @@ export default function Layout({
   return (
     <div className="container w-full md:max-w-3xl mx-auto pt-20 px-2">
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
         <meta name="og:title" content={siteTitle} />
         <meta name="description" content="yaojie's portfolio" />
         <meta name="twitter:card" content="summary_large_image" />
