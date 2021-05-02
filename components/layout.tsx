@@ -23,14 +23,16 @@ export default function Layout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.causztic.com/" />
-        <meta property="og:image" content="images/profile.jpg" />
+        <meta property="og:image" content="https://www.causztic.com/images/profile.jpg" />
 
         <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://www.causztic.com/" />
-        <meta property="twitter:image" content="images/profile.jpg" />
+        <meta property="twitter:image" content="https://www.causztic.com/images/profile.jpg" />
         <title>{title}</title>
       </Head>
       <header>
