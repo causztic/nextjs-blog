@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
@@ -27,7 +27,7 @@ const components: any = {
   code({node, inline, className, children, ...props}) {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
-      <SyntaxHighlighter style={docco} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
+      <SyntaxHighlighter style={darcula} language={match[1]} PreTag="div" children={String(children).replace(/\n$/, '')} {...props} />
     ) : (
       <code className={className} {...props} />
     )
