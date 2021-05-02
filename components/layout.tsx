@@ -14,7 +14,7 @@ export default function Layout({
   home?: boolean,
   title?: string,
   description?: string
-}) {
+}): JSX.Element {
   return (
     <div className="container w-full md:max-w-3xl mx-auto pt-20 px-2">
       <Head>
@@ -29,7 +29,7 @@ export default function Layout({
         <meta property="og:image" content="https://www.causztic.com/images/profile.jpg" />
 
         <meta property="twitter:title" content={title} />
-        <meta property="og:description" content={description} />
+        <meta property="twitter:description" content={description} />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://www.causztic.com/" />
         <meta property="twitter:image" content="https://www.causztic.com/images/profile.jpg" />

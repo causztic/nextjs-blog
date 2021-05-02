@@ -1,13 +1,13 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import remark from 'remark'
-import html from 'remark-html'
 import { formatDate } from './date'
+
+export type PostData = Record<string, string>;
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export function getAllPostIds() {
+export function getAllPostIds(): { params: { id: string }}[] {
   const fileNames = fs.readdirSync(postsDirectory)
   return fileNames.map(fileName => {
     return {
@@ -18,10 +18,10 @@ export function getAllPostIds() {
   })
 }
 
-export function getSortedPostsData() {
+export function getSortedPostsData(): PostData[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData: Record<string, any> = fileNames.map(fileName => {
+  const allPostsData: PostData[] = fileNames.map(fileName => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '')
 
@@ -48,7 +48,7 @@ export function getSortedPostsData() {
   })
 }
 
-export async function getPostData(id: string) {
+export async function getPostData(id: string): Promise<PostData> {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
