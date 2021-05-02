@@ -2,14 +2,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import ruby from 'react-syntax-highlighter/dist/cjs/languages/prism/ruby';
+import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql';
 
 import { GetStaticPathsResult, GetStaticPropsResult } from 'next'
 import Link from 'next/link'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData, PostData } from '../../lib/posts'
 import styles from './post.module.scss'
+
+SyntaxHighlighter.registerLanguage('ruby', ruby);
+SyntaxHighlighter.registerLanguage('sql', sql);
 
 type Params = { id: string }
 export async function getStaticProps({ params }: { params: Params }): Promise<GetStaticPropsResult<PostData>> {
