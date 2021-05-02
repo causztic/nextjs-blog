@@ -7,7 +7,7 @@ import { getSortedPostsData, PostData } from '../../lib/posts'
 export async function getStaticProps(): Promise<GetStaticPropsResult<{ posts: PostData[] }>> {
   const posts = getSortedPostsData()
   return {
-    props: { posts }
+    props: { posts: posts }
   }
 }
 
