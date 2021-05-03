@@ -10,4 +10,18 @@
   li {
     @apply mb-2;
   }
+
+  h2 {
+    @apply mt-6;
+    @apply mb-2;
+  }
+
+  p {
+    @apply mb-2;
+  }
+}
+
+.basic {
+  @apply bg-gray-200;
+  @apply p-1;
 }

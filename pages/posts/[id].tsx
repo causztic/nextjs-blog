@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import ruby from 'react-syntax-highlighter/dist/cjs/languages/prism/ruby';
+import javascript from 'react-syntax-highlighter/dist/cjs/languages/prism/javascript';
 import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql';
 
 import { GetStaticPathsResult, GetStaticPropsResult } from 'next'
@@ -16,6 +17,7 @@ import styles from './post.module.scss'
 
 SyntaxHighlighter.registerLanguage('ruby', ruby);
 SyntaxHighlighter.registerLanguage('sql', sql);
+SyntaxHighlighter.registerLanguage('javascript', javascript);
 
 type Params = { id: string }
 export async function getStaticProps({ params }: { params: Params }): Promise<GetStaticPropsResult<PostData>> {
@@ -34,6 +36,13 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 }
 
 const components: any = {
+  a({ href, children }) {
+    if (!href.startsWith('http')) {
+      return <></>
+    }
+
+    return <a href={href} rel='nofollow noreferrer noopener' target='_blank'>{children}</a>;
+  },
   code({ inline, className, children, ...props }) {
     const match = /language-(\w+)/.exec(className || '')
     return !inline && match ? (
@@ -41,7 +50,7 @@ const components: any = {
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>
     ) : (
-      <code className={className} {...props} />
+      <code className={styles.basic}>{children}</code>
     )
   }
 }
