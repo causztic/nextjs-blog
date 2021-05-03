@@ -56,4 +56,4 @@ You could also use other options to host Nextjs as well, and if your project all
 
 ## Final thoughts
 
-It feels great to use Next.js,especially after spending so much time on previous projects trudging through webpack documentation, writing routes, or finding basic components that feel right.
+It feels great to use Next.js,especially after spending so much time on previous projects trudging through webpack documentation, writing routes, or finding basic components that feel right. Oh, and the code for this application can be found at [https://github.com/causztic/nextjs-blog](https://github.com/causztic/nextjs-blog)!

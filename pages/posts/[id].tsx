@@ -68,7 +68,7 @@ export default function Post({ title, date, content, tags }: PostData): JSX.Elem
             {content}
           </ReactMarkdown>
         </section>
-        <section className="tags mt-2">
+        <section className="tags mt-6">
           {tags.map((tag: string, index: number) => <Tag key={index} text={tag}></Tag>)}
         </section>
       </article>
