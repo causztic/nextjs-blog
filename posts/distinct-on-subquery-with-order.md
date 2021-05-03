@@ -37,7 +37,6 @@ However, this posed two issues:
 * The pagination will not work as intended as the first query will be paginated and then the second result will always be one page (since **dms** will always only have one page's worth of **ids**.
 * The queries are executed twice - ideally we should only have one sql execution here. If you were to run **explain** on the second query, you'll see that the ids have already been populated.
 
-
 To solve this, I used a **FROM** clause to make it a subquery, and paginate on the outer query:
 
 ~~~ruby

@@ -3,7 +3,8 @@ import path from 'path'
 import matter from 'gray-matter'
 import { formatDate } from './date'
 
-export type PostData = Record<string, string>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type PostData = Record<string, any>;
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
