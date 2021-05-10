@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import DefaultErrorPage from 'next/error'
+import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -20,11 +22,9 @@ SyntaxHighlighter.registerLanguage('sql', sql);
 SyntaxHighlighter.registerLanguage('javascript', javascript);
 
 type Params = { id: string }
-export async function getStaticProps({ params }: { params: Params }): Promise<GetStaticPropsResult<PostData>> {
+export async function getStaticProps({ params }: { params: Params }): Promise<GetStaticPropsResult<{ post: PostData | null }>> {
   const postData = await getPostData(params.id)
-  return {
-    props: postData
-  }
+  return { props: { post: postData }};
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
@@ -55,26 +55,36 @@ const components: any = {
   }
 }
 
+export default function Post({ post }: { post: PostData | null }): JSX.Element {
+  if (!post) {
+    return <>
+      <Head>
+        <meta name="robots" content="noindex" />
+      </Head>
+      <DefaultErrorPage statusCode={404} />
+    </>
+  } else {
+    const { title, formattedDate, content, tags } = post
 
-export default function Post({ title, date, content, tags }: PostData): JSX.Element {
-  return (
-    <Layout title={title} description={content.split("\n")[0]}>
-      <article className="mb-4">
-        <h1 className="font-bold font-sans text-gray-900">{title}</h1>
-        <section className="post-date text-sm text-gray-600">{date}</section>
-        <hr className="my-4" />
-        <section className={styles.postContent}>
-          <ReactMarkdown components={components}>
-            {content}
-          </ReactMarkdown>
-        </section>
-        <section className="tags mt-6">
-          {tags.map((tag: string, index: number) => <Tag key={index} text={tag}></Tag>)}
-        </section>
-      </article>
-      <Link href="/posts">
-        <a className="underline text-blue-400">Read my other posts</a>
-      </Link>
-    </Layout>
-  )
+    return (
+      <Layout title={title} description={content.split("\n")[0]}>
+        <article className="mb-4">
+          <h1 className="font-bold font-sans text-gray-900">{title}</h1>
+          <section className="post-date text-sm text-gray-600">{formattedDate}</section>
+          <hr className="my-4" />
+          <section className={styles.postContent}>
+            <ReactMarkdown components={components}>
+              {content}
+            </ReactMarkdown>
+          </section>
+          <section className="tags mt-6">
+            {tags.map((tag: string, index: number) => <Tag key={index} text={tag}></Tag>)}
+          </section>
+        </article>
+        <Link href="/posts">
+          <a className="underline text-blue-400">Read my other posts</a>
+        </Link>
+      </Layout>
+    )
+  }
 }

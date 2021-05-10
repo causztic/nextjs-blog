@@ -1,10 +1,7 @@
 ---
 title: New Design with Next.js - from development to deployment
 date: '2021-05-02'
-type: post
 published: true
-status: publish
-categories: []
 tags: ["code", "nextjs", "tailwindcss"]
 ---
 It's high time for a blog update so I spent the weekend fiddling around with several new technologies..

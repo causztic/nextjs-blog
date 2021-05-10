@@ -1,11 +1,7 @@
 ---
-layout: post
 title: Devise JWT with Sessions Hybrid
 date: '2019-09-20'
-type: post
 published: true
-status: publish
-categories: []
 tags: ["code", "ruby"]
 ---
 So here's the deal: we wanted to create a shared authentication platform with Devise for both API and non-API (vanilla website) usage.

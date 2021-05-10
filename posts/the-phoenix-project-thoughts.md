@@ -1,11 +1,7 @@
 ---
-layout: post
 title: Phoenix
 date: '2020-02-26'
-type: post
 published: true
-status: publish
-categories: []
 tags: ["books"]
 ---
 I am one month late to my reading schedule but at least I've completed **The Phoenix Project** yesterday. It is about DevOps, wrapped in an entertaining novel, and it was very insightful. Like a phoenix reborn from the ashes, Parts Unlimited managed to undergo a transformation in their operations and saved their business from certain doom. This was achieved by maintaining shorter build cycles, stronger cohesion between the business, development, operations and security, and improving the constraints around the bottleneck among other principles.

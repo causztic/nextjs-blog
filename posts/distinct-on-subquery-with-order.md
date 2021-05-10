@@ -1,10 +1,7 @@
 ---
 title: DISTINCT ON subquery with correct ordering
 date: '2020-10-14'
-type: post
 published: true
-status: publish
-categories: []
 tags: ["code", "rails"]
 ---
 I needed to write an API for **direct_messages#index**, which returns the latest **direct_message** per sender, and it has to be paginated.

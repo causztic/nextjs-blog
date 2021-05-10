@@ -4,9 +4,22 @@ import matter from 'gray-matter'
 import { formatDate } from './date'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type PostData = Record<string, any>;
+export type PostData = PostMetadata & { id: string, content: string }
+export type PostTitleData = PostMetadata & { id: string }
+export type PostMetadata = { title: string, date: string, published?: boolean, tags: Array<string>, formattedDate: string }
 
 const postsDirectory = path.join(process.cwd(), 'posts')
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function parseHeaders(data: { [key: string]: any }): PostMetadata {
+  return {
+    title: data.title,
+    published: data.published,
+    tags: data.tags,
+    date: data.date,
+    formattedDate: formatDate(data.date),
+  }
+}
 
 export function getAllPostIds(): { params: { id: string }}[] {
   const fileNames = fs.readdirSync(postsDirectory)
@@ -19,10 +32,10 @@ export function getAllPostIds(): { params: { id: string }}[] {
   })
 }
 
-export function getSortedPostsData(): PostData[] {
+export function getSortedPostsData(): PostTitleData[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData: PostData[] = fileNames.map(fileName => {
+  const allPostsData: PostTitleData[] = fileNames.map(fileName => {
     // Remove ".md" from file name to get id
     const id = fileName.replace(/\.md$/, '')
 
@@ -36,7 +49,7 @@ export function getSortedPostsData(): PostData[] {
     // Combine the data with the id
     return {
       id,
-      ...matterResult.data
+      ...parseHeaders(matterResult.data)
     }
   })
   // Sort posts by date
@@ -46,19 +59,24 @@ export function getSortedPostsData(): PostData[] {
     } else {
       return -1
     }
-  })
+  }).filter((post) => post.published);
 }
 
-export async function getPostData(id: string): Promise<PostData> {
+export async function getPostData(id: string): Promise<PostData | null> {
   const fullPath = path.join(postsDirectory, `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents)
-  return {
-    id,
-    content: matterResult.content,
-    ...matterResult.data,
-    date: formatDate(matterResult.data.date)
+  const headers = parseHeaders(matterResult.data)
+
+  if (headers.published) {
+    return {
+      id,
+      content: matterResult.content,
+      ...headers
+    }
   }
+
+  return null
 }
