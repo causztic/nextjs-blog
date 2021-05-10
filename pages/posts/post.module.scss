@@ -14,10 +14,27 @@
   h2 {
     @apply mt-6;
     @apply mb-2;
+    @apply font-bold;
+  }
+
+  h3 {
+    @apply mt-4;
+    @apply mb-1;
   }
 
   p {
     @apply mb-2;
+  }
+
+  blockquote {
+    @apply italic;
+    @apply pl-6;
+    @apply border-l-8;
+    @apply border-blue-500;
+  }
+
+  code {
+    font-size: 0.8em;
   }
 }
 
