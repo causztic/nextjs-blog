@@ -4,7 +4,6 @@ date: '2021-05-10'
 published: true
 tags: ["code", "rspec", "rails"]
 ---
-
 People write code differently - that is a fact. Using guards over if-else statements, or using `describe` over `context` is more of a linguistic decision than a technical one. However, some techniques and codes work better than others in an objective sense. What is, in my opinion(!), an objectively better test suite?
 
 1. A faster suite, but without making compromises to test integrity
