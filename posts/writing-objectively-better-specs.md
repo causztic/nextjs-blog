@@ -79,7 +79,7 @@ Furthermore, `receive_message_chain` does not fully validate the calling chain, 
 
 ```ruby
 class TestClass
-  def abc
+  def foo
     true
   end
 end
