@@ -31,10 +31,19 @@
     @apply pl-6;
     @apply border-l-8;
     @apply border-blue-500;
+    @apply my-8;
   }
 
   code {
     font-size: 0.8em;
+  }
+
+  ul {
+    list-style: initial;
+  }
+
+  pre {
+    @apply my-6;
   }
 }
 

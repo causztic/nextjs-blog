@@ -1,17 +1,19 @@
 ---
-title: Fixing a weird Gboard autocompletion bug on React components
+title: Fixing a weird Gboard interaction bug with React components
 date: '2021-08-20'
 published: true
 tags: ["code", "react"]
 ---
 
-In one of our projects, we have a CurrencyField class component that does several things:
+In one of our projects, we have a `CurrencyField` class component that does several things:
 
-- IE compatibility
 - onChange, adds in a comma to separate the thousands
 - onBlur, fills in missing decimal places
 
-Recently, a quality engineer raised a very interesting issue - while using our CurrencyField component on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
+Recently, a quality engineer raised a very interesting issue - while using `CurrencyField` on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
+
+
+> ADD .gif for bug replication
 
 ## Triage
 
@@ -31,9 +33,9 @@ The next thing that came to my mind was "Oh, I could just set autocomplete and t
 
 I discovered that `handleChange` was called twice - once on the input of the fourth character, and another when 💯 is attempted to be added. The [SyntheticEvent](https://reactjs.org/docs/events.html) looked the same for both inputs, which stumped me. There *has* to be something in the [W3C standards](https://www.w3.org/standards/) that differentiates a manual input and an autocompleted input, right?
 
-(TODO: add SyntheticEvent screenshot)
+> ADD SyntheticEvent screenshot
 
-I dug deeper into the `SyntheticEvent` and examined the `NativeEvent` itself. There were two `NativeEvent`s of different `inputType` that fired simultaenously:
+I dug deeper into the `SyntheticEvent` and examined the `NativeEvent` itself. There were two `NativeEvents` of different `inputTypes` that fired simultaenously:
 
 - insertCompositionText with data of `1000`
 - insertText with data of `1000`
@@ -70,11 +72,11 @@ render() {
 }
 ```
 
-Doing this improves the UX on mobile as a numeric keyboard will appear, allows us to maintain the comma separator for readability, and also prevents the Gboard emoji bug from happening as the keyboard is not a text one anymore! Talk about killing two birds with one stone :)
+Doing this improves the UX on mobile as a numeric keyboard will appear, which allows us to maintain the comma separator for readability, while also preventing the Gboard emoji bug from happening with the keyboard change! Talk about killing two birds with one stone :)
 
 ## Some unrelated rambling
 
-While sleuthing around to fix this bug, I also managed to refactor the component from a weird mix of uncontrolled and controlled to a fully controlled one. I will be going through this particular case in the next article!
+While sleuthing around to fix this bug, I also managed to refactor the component from a weird mix of uncontrolled and controlled to a fully controlled one. I will be going through this particular exercise in the next article!
 
 
 
