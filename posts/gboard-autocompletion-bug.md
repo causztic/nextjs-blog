@@ -72,7 +72,9 @@ render() {
 
 Doing this improves the UX on mobile as a numeric keyboard will appear, allows us to maintain the comma separator for readability, and also prevents the Gboard emoji bug from happening as the keyboard is not a text one anymore! Talk about killing two birds with one stone :)
 
+## Some unrelated rambling
 
+While sleuthing around to fix this bug, I also managed to refactor the component from a weird mix of uncontrolled and controlled to a fully controlled one. I will be going through this particular case in the next article!
 
 
 
