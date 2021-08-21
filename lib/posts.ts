@@ -6,19 +6,26 @@ import { formatDate } from './date'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PostData = PostMetadata & { id: string, content: string }
 export type PostTitleData = PostMetadata & { id: string }
-export type PostMetadata = { title: string, date: string, published?: boolean, tags: Array<string>, formattedDate: string }
+export type PostMetadata = { title: string, date: string, published?: boolean, tags: Array<string>, thumbnail?: string, formattedDate: string }
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseHeaders(data: { [key: string]: any }): PostMetadata {
-  return {
+  const headers: PostMetadata = {
     title: data.title,
     published: data.published,
     tags: data.tags,
     date: data.date,
     formattedDate: formatDate(data.date),
   }
+
+  // headers cannot be parsed if undefined, must be null
+  if (data.thumbnail) {
+    headers.thumbnail = data.thumbnail;
+  }
+
+  return headers;
 }
 
 export function getAllPostIds(): { params: { id: string }}[] {
@@ -74,7 +81,7 @@ export async function getPostData(id: string): Promise<PostData | null> {
     return {
       id,
       content: matterResult.content,
-      ...headers
+      ...headers,
     }
   }
 

@@ -31,10 +31,30 @@
     @apply pl-6;
     @apply border-l-8;
     @apply border-blue-500;
+    @apply my-8;
   }
 
   code {
     font-size: 0.8em;
+  }
+  
+  pre {
+    @apply my-6;
+  }
+
+  video {
+    height: 300px;
+    margin: auto;
+  }
+
+  figure {
+    @apply my-6;
+  }
+
+  figcaption {
+    @apply mt-2;
+    @apply text-center;
+    font-size: 0.7em;
   }
 }
 
