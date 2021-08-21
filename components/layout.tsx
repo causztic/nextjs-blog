@@ -7,11 +7,13 @@ const name = 'Lim Yao Jie'
 export default function Layout({
   children,
   home,
+  url = 'https://www.causztic.com/',
   title = 'Lim Yao Jie',
   description = "Software Engineer doing Ruby on Rails, Javascript, and some DevOps",
   thumbnail = "https://www.causztic.com/images/profile.jpg",
 }: {
   children: React.ReactNode
+  url?: string,
   home?: boolean,
   title?: string,
   description?: string,
@@ -27,13 +29,13 @@ export default function Layout({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.causztic.com/" />
+        <meta property="og:url" content={url} />
         <meta property="og:image" content={thumbnail} />
 
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.causztic.com/" />
+        <meta property="twitter:url" content={url} />
         <meta property="twitter:image" content={thumbnail} />
         <title>{title}</title>
       </Head>

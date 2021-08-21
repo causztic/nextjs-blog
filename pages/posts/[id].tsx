@@ -76,7 +76,7 @@ export default function Post({ post }: { post: PostData | null }): JSX.Element {
     const { title, formattedDate, content, tags, thumbnail } = post
 
     return (
-      <Layout title={title} description={content.split("\n")[0]} thumbnail={setBaseUrl(thumbnail)}>
+      <Layout title={title} description={content.split("\n")[0]} thumbnail={setBaseUrl(thumbnail)} url={setBaseUrl(`/posts/${post.id}`)}>
         <article className="mb-4">
           <h1 className="font-bold font-sans text-gray-900">{title}</h1>
           <section className="post-date text-sm text-gray-600">{formattedDate}</section>
