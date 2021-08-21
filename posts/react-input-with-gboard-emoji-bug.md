@@ -1,5 +1,5 @@
 ---
-title: Fixing a weird Gboard interaction bug with React components
+title: Fixing a weird React input bug with Gboard emoji suggestions
 date: '2021-08-20'
 published: true
 tags: ["code", "react"]
@@ -12,8 +12,14 @@ In one of our projects, we have a `CurrencyField` class component that does seve
 
 Recently, a quality engineer raised a very interesting issue - while using `CurrencyField` on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
 
-
-> ADD .gif for bug replication
+<figure>
+  <video autoplay muted loop>
+    <source src="/videos/react-input-with-gboard-emoji-bug.mp4" />
+  </video>
+  <figcaption>
+    <a href="https://github.com/causztic/react-testbed/tree/gboard-autocompletion-bug">Sample repo</a>. Notice that there is an extra input as the emoji appears and the next key is pressed.
+  </figcaption>
+</figure>
 
 ## Triage
 
@@ -21,7 +27,7 @@ To isolate the bug's origin, we attempted to replicate this on different mobile 
 
 ## Preparation
 
-To isolate the bug, I have created a [sample repo]() with minimum moving parts, and debugged it on my device with [chrome://inspect/#devices](chrome://inspect/#devices) - it provides easy port forwarding and allows inspection, which is unavailable on the phone.
+To isolate the bug, I created a [sample repo](https://github.com/causztic/react-testbed/tree/gboard-autocompletion-bug) with minimum moving parts. I used **edge://inspect/#devices** to debug it on my device - it provides easy port forwarding and allows inspection, which is unavailable on the phone.
 
 ## Approach
 
@@ -31,16 +37,11 @@ We could have replaced the text input with a numeric one, but vanilla html numer
 
 The next thing that came to my mind was "Oh, I could just set autocomplete and that'll be fixed!". But apparently, the emoji suggestions appear regardless of what `autocomplete` is being set as. It looks like I have to dig into the component lifecycle.
 
-I discovered that `handleChange` was called twice - once on the input of the fourth character, and another when 💯 is attempted to be added. The [SyntheticEvent](https://reactjs.org/docs/events.html) looked the same for both inputs, which stumped me. There *has* to be something in the [W3C standards](https://www.w3.org/standards/) that differentiates a manual input and an autocompleted input, right?
+I discovered that `handleChange` was called twice - once on the input of the fourth character, and another when 💯 is attempted to be added. The [SyntheticEvent](https://reactjs.org/docs/events.html) looked the same for both inputs at a glance, but upon closer inspection I noticed that two NativeEvents of different inputTypes were fired simultaenously:
 
-> ADD SyntheticEvent screenshot
+![Screenshot of SyntheticEvent](/images/react-input-with-gboard-emoji-bug.png)
 
-I dug deeper into the `SyntheticEvent` and examined the `NativeEvent` itself. There were two `NativeEvents` of different `inputTypes` that fired simultaenously:
-
-- insertCompositionText with data of `1000`
-- insertText with data of `1000`
-
-If we could prevent one of them from triggering, it should fix the bug (and it did!):
+If we could prevent the second event from triggering, it should fix the bug (and it did!):
 
 ```js
 handleChange(e) {
@@ -56,9 +57,16 @@ handleChange(e) {
 }
 ```
 
+After additional testing and going through the InputEvent specs in [W3C](https://www.w3.org/TR/input-events-1/) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType), I concluded that the fix is acceptable (barring some edge cases, maybe?):
+
+- With autocompletion enabled, it uses the event `insertCompositionText`
+- Normal typing uses the event `insertText`
+- Pasting in the input uses the event `insertFromPaste`
+- Deletion uses events with the `delete` prefix
+
 ## Using inputmode for a better fix
 
-After fixing this bug with the snippet above, I discovered the existence of the global attribute [inputmode](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) (thanks Eileen!). It provides a hint to browsers for devices with onscreen keyboards to decide which keyboard to display, and it looks to be fully supported by major mobile browsers. While there is no support for several browsers on desktop, it fallbacks to the normal on-screen keyboard, which is the status quo for desktop but a UX improvement on mobile.
+After fixing this bug with the snippet above, I discovered the existence of the global attribute [inputmode](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) (thanks Eileen!). It provides a hint to browsers for devices with onscreen keyboards to decide which keyboard to display, and it is fully supported by major mobile browsers. While there is no support for several browsers on desktop, it fallbacks to the normal on-screen keyboard for those platforms and that is okay for us.
 
 I updated `render` while also removing the previous `handleChange` catch:
 
@@ -76,7 +84,7 @@ Doing this improves the UX on mobile as a numeric keyboard will appear, which al
 
 ## Some unrelated rambling
 
-While sleuthing around to fix this bug, I also managed to refactor the component from a weird mix of uncontrolled and controlled to a fully controlled one. I will be going through this particular exercise in the next article!
+While sleuthing around to fix this bug, I also managed to refactor the component from a weird mix of uncontrolled and controlled to a fully controlled one. I will be going through this particular exercise in a future article. Thank you for reading!
 
 
 
