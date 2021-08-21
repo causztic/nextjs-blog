@@ -62,7 +62,7 @@ After fixing this bug with the snippet above, I discovered the existence of the 
 
 I updated `render` while also removing the previous `handleChange` catch:
 
-```jsx
+```js
 render() {
   const { value } = this.state;
 
