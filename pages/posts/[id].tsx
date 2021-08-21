@@ -56,6 +56,14 @@ const components: any = {
   }
 }
 
+const setBaseUrl = (url?: string) => {
+  if (url) {
+    return `https://www.causztic.com${url}`
+  }
+
+  return undefined;
+}
+
 export default function Post({ post }: { post: PostData | null }): JSX.Element {
   if (!post) {
     return <>
@@ -65,10 +73,10 @@ export default function Post({ post }: { post: PostData | null }): JSX.Element {
       <DefaultErrorPage statusCode={404} />
     </>
   } else {
-    const { title, formattedDate, content, tags } = post
+    const { title, formattedDate, content, tags, thumbnail } = post
 
     return (
-      <Layout title={title} description={content.split("\n")[0]}>
+      <Layout title={title} description={content.split("\n")[0]} thumbnail={setBaseUrl(thumbnail)}>
         <article className="mb-4">
           <h1 className="font-bold font-sans text-gray-900">{title}</h1>
           <section className="post-date text-sm text-gray-600">{formattedDate}</section>
