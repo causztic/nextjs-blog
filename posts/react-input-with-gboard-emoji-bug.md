@@ -5,12 +5,9 @@ published: true
 tags: ["code", "react"]
 ---
 
-In one of our projects, we have a `CurrencyField` class component that does several things:
+In one of our projects, we have a `CurrencyField` class component that formats user input, by adding commas to separate the thousands for readability i.e. formatting "1000" to "1,000".
 
-- onChange, adds in a comma to separate the thousands
-- onBlur, fills in missing decimal places
-
-Recently, a quality engineer raised a very interesting issue - while using `CurrencyField` on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
+Recently, a quality engineer raised a very interesting issue - while using the app on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
 
 <figure>
   <video autoplay muted loop>
@@ -31,13 +28,13 @@ To isolate the bug, I created a [sample repo](https://github.com/causztic/react-
 
 ## Approach
 
-The most straightforward way to prevent this bug from occcuring would be to disable emoji suggestions. While this would be the fastest way to fix this, we cannot expect every user to know and disable this functionality, specifically for our application.
+The most straightforward way to prevent this bug from occurring would be to disable emoji suggestions. While this would be the fastest way to fix this, we cannot expect every user to know and disable this functionality, specifically for our application.
 
-We could have replaced the text input with a numeric one, but vanilla html numeric inputs do not support comma separators, which is a UX requirement for our project as we frequently deal with large numbers.
+We could have replaced the text input with a numeric one, but vanilla HTML numeric inputs do not support comma separators, which is a UX requirement for our project as we frequently deal with large numbers.
 
-The next thing that came to my mind was "Oh, I could just set autocomplete and that'll be fixed!". But apparently, the emoji suggestions appear regardless of what `autocomplete` is being set as. It looks like I have to dig into the component lifecycle.
+The next thing that came to my mind was, "Oh, I could just set autocomplete and that'll be fixed!". But apparently, the emoji suggestions appear regardless of what `autocomplete` is being set as. It looks like I have to dig into the component lifecycle.
 
-I discovered that `handleChange` was called twice - once on the input of the fourth character, and another when 💯 is attempted to be added. The [SyntheticEvent](https://reactjs.org/docs/events.html) looked the same for both inputs at a glance, but upon closer inspection I noticed that two NativeEvents of different inputTypes were fired simultaenously:
+I discovered that `handleChange` was called twice - once on the input of the fourth character, and another when 💯 is attempted to be added. The [SyntheticEvent](https://reactjs.org/docs/events.html) looked the same for both inputs at a glance, but upon closer inspection I noticed that two NativeEvents of different inputTypes were fired simultaneously:
 
 ![Screenshot of SyntheticEvent](/images/react-input-with-gboard-emoji-bug.png)
 
@@ -66,7 +63,7 @@ After additional testing and going through the InputEvent specs in [W3C](https:/
 
 ## Using inputmode for a better fix
 
-After fixing this bug with the snippet above, I discovered the existence of the global attribute [inputmode](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) (thanks Eileen!). It provides a hint to browsers for devices with onscreen keyboards to decide which keyboard to display, and it is fully supported by major mobile browsers. While there is no support for several browsers on desktop, it fallbacks to the normal on-screen keyboard for those platforms and that is okay for us.
+After fixing this bug with the snippet above, I discovered the existence of the global attribute [inputmode](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inputmode) (thanks Eileen!). It provides a hint to browsers for devices with onscreen keyboards to decide which keyboard to display, and it is fully supported by major mobile browsers. While there is no support for several browsers on desktop, they'd fallback to the normal onscreen keyboard and that is okay for us.
 
 I updated `render` while also removing the previous `handleChange` catch:
 
@@ -80,7 +77,7 @@ render() {
 }
 ```
 
-Doing this improves the UX on mobile as a numeric keyboard will appear, which allows us to maintain the comma separator for readability, while also preventing the Gboard emoji bug from happening with the keyboard change! Talk about killing two birds with one stone :)
+Doing this improves the UX on mobile as a numeric keyboard will appear, allows us to maintain the comma separator for readability, while also preventing the Gboard emoji bug from happening with the keyboard change! Talk about killing two birds with one stone :)
 
 ## Some unrelated rambling
 
