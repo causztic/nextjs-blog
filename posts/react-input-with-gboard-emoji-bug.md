@@ -7,7 +7,7 @@ tags: ["code", "react"]
 
 In one of our projects, we have a `CurrencyField` class component that formats user input, by adding commas to separate the thousands for readability i.e. formatting "1000" to "1,000".
 
-Recently, a quality engineer raised a very interesting issue - while using the app on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
+Recently, a quality engineer raised a very interesting ticket - while using the app on Android, it will automatically duplicate any input with a pattern of "100n" to "10,0n1,00n".
 
 <figure>
   <video autoplay muted loop>
@@ -54,12 +54,7 @@ handleChange(e) {
 }
 ```
 
-After additional testing and going through the InputEvent specs in [W3C](https://www.w3.org/TR/input-events-1/) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType), I concluded that the fix is acceptable (barring some edge cases, maybe?):
-
-- With autocompletion enabled, it uses the event `insertCompositionText`
-- Normal typing uses the event `insertText`
-- Pasting in the input uses the event `insertFromPaste`
-- Deletion uses events with the `delete` prefix
+After additional testing and going through the InputEvent specs in [W3C](https://www.w3.org/TR/input-events-1/) and [MDN](https://developer.mozilla.org/en-US/docs/Web/API/InputEvent/inputType), I concluded that the fix is acceptable for our current userbase.
 
 ## Using inputmode for a better fix
 
