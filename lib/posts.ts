@@ -12,7 +12,7 @@ const postsDirectory = path.join(process.cwd(), 'posts')
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseHeaders(data: { [key: string]: any }): PostMetadata {
-  let headers: PostMetadata = {
+  const headers: PostMetadata = {
     title: data.title,
     published: data.published,
     tags: data.tags,
