@@ -3,7 +3,7 @@ title: Fixing a weird React input bug with Gboard emoji suggestions
 date: '2021-08-20'
 published: true
 tags: ["code", "react"]
-thumbnail: "/images/mobile-phone-thumbnail.jpeg"
+thumbnail: ["/images/mobile-phone-thumbnail.jpeg", 1350, 900]
 ---
 In one of our projects, we have a `CurrencyField` class component that formats user input, by adding commas to separate the thousands for readability i.e. formatting "1000" to "1,000".
 

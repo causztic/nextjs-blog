@@ -64,6 +64,18 @@ const setBaseUrl = (url?: string) => {
   return undefined;
 }
 
+const getImages = (thumbnail?: [string, number, number]) => {
+  if (thumbnail) {
+    return [{
+      url: setBaseUrl(thumbnail[0])!,
+      width: thumbnail[1],
+      height: thumbnail[2]
+    }]
+  }
+
+  return undefined;
+}
+
 export default function Post({ post }: { post: PostData | null }): JSX.Element {
   if (!post) {
     return <>
@@ -76,7 +88,7 @@ export default function Post({ post }: { post: PostData | null }): JSX.Element {
     const { title, formattedDate, content, tags, thumbnail } = post
 
     return (
-      <Layout title={title} description={content.split("\n")[0]} thumbnail={setBaseUrl(thumbnail)} url={setBaseUrl(`/posts/${post.id}`)}>
+      <Layout title={title} description={content.split("\n")[0]} images={getImages(thumbnail)} url={setBaseUrl(`/posts/${post.id}`)}>
         <article className="mb-4">
           <h1 className="font-bold font-sans text-gray-900">{title}</h1>
           <section className="post-date text-sm text-gray-600">{formattedDate}</section>
