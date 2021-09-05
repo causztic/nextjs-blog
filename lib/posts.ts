@@ -6,7 +6,7 @@ import { formatDate } from './date'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PostData = PostMetadata & { id: string, content: string }
 export type PostTitleData = PostMetadata & { id: string }
-export type PostMetadata = { title: string, date: string, published?: boolean, tags: Array<string>, thumbnail?: string, formattedDate: string }
+export type PostMetadata = { title: string, date: string, published?: boolean, tags: Array<string>, thumbnail?: [string, number, number], formattedDate: string }
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 

@@ -2,41 +2,37 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { NextSeo } from 'next-seo'
+
 const name = 'Lim Yao Jie'
 
 export default function Layout({
   children,
   home,
-  url = 'https://www.causztic.com/',
-  title = 'Lim Yao Jie',
-  description = "Software Engineer doing Ruby on Rails, Javascript, and some DevOps",
-  thumbnail = "https://www.causztic.com/images/profile.jpg",
+  url,
+  title,
+  description,
+  images,
 }: {
   children: React.ReactNode
   url?: string,
   home?: boolean,
   title?: string,
   description?: string,
-  thumbnail?: string
+  images?: { url: string, width: number, height: number }[]
 }): JSX.Element {
   return (
     <div className="container w-full md:max-w-3xl mx-auto pt-20 px-2">
+      <NextSeo
+        title={title}
+        description={description}
+        openGraph={{
+          url,
+          images
+        }}
+      />
       <Head>
-        {/* <link rel="icon" href="/favicon.ico" /> */}
-        <meta name="description" content={description} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={url} />
-        <meta property="og:image" content={thumbnail} />
-
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={url} />
-        <meta property="twitter:image" content={thumbnail} />
         <title>{title}</title>
       </Head>
       <header>
