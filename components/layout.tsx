@@ -10,7 +10,7 @@ export default function Layout({
   children,
   home,
   url,
-  title,
+  title = 'Lim Yao Jie',
   description,
   images,
 }: {
