@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import Script from 'next/script'
 
 import { NextSeo } from 'next-seo'
 
@@ -34,6 +35,16 @@ export default function Layout({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=UA-46783471-1"></Script>
+      <Script>
+        {
+          `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-46783471-1');`
+        }
+      </Script>
       <header>
         {home ? (
           <>
