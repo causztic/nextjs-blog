@@ -35,14 +35,16 @@ export default function Layout({
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <Script src="https://www.googletagmanager.com/gtag/js?id=UA-46783471-1"></Script>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-6K5CMEBZJG"></Script>
       <Script>
         {
-          `window.dataLayer = window.dataLayer || [];
+          `
+          window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'UA-46783471-1');`
+          gtag('config', 'G-6K5CMEBZJG');
+          `
         }
       </Script>
       <header>
