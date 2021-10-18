@@ -11,17 +11,17 @@ Recently, one of our Rails applications wanted an upgrade to Webpack 5, for fast
 
 The plugin structure is fairly straightforward, consisting of:
 
-- plugin
+- **plugin**
   - index.js, which contains compiler hooks
   - loader.js, which reads all locales and injects them into files
-- i18n
+- **i18n**
   - index.js, which initialises the locale and translations for [i18n-js](https://github.com/fnando/i18n-js)
 
 ## How the plugin works in Webpack 4
 
 Half the battle was discovering how the plugin worked in the first place. Due to my unfamiliarity with Webpack plugins, the order of how the hooks were declared tripped me up pretty bad. The hook that was declared first *actually ran after* the one declared later!
 
-> It'll be best if lifecycle hooks were written in-order, as humans read code top-down. It'll be easier to visualise how the code runs, even though the hooks can be declared out-of-order.
+> Even though the hooks can be declared out-of-order, it'll be best if lifecycle hooks were written as if they will be run in-order, as humans read code top-down.
 
 Here's how the plugin actually works:
 
