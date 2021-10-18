@@ -1,5 +1,5 @@
 ---
-title: Upgrading a webpack 4 plugin to webpack 5
+title: How I upgraded a webpack 4 plugin to webpack 5
 date: '2021-10-13'
 published: true
 tags: ["code", "webpack"]
@@ -15,31 +15,40 @@ The plugin structure is fairly straightfoward, consisting of:
   - index.js, which contains compiler hooks
   - loader.js, which reads all locales and injects them into files
 - i18n
-  - index.js, which initialises the correct locale and translations for the `i18n-js` library
+  - index.js, which initialises the locale and translations for [i18n-js](https://github.com/fnando/i18n-js)
 
 ## How the plugin works in Webpack 4
 
-I spent some time reading through the webpack documentation and visualising the code flow.
+Half the battle was discovering how the plugin worked in the first place. No thanks to my unfamiliarity with webpack plugins, one thing that tripped me up really badly in the codebase was the order of how the hooks were declared. The hook that was declared first was *actually ran after* the one declared later!
+
+> It'll be best if lifecycle hooks were written in-order, as humans read code top-down. It'll be easier to visualise how the code runs, even though the hooks can be declared out-of-order.
 
 1. The compiler resolver checks for modules with a module name of `i18n` in the files to be compiled. Afterwards, it replaces the path to a relative one, targetting `../i18n/index.js`, which is one of the files mentioned earlier. This step basically replaces all references of `i18n` to that specific file. The resultant import looks something like `import i18n from 'directory-of-plugin/i18n/index.js'`.
 
-2. After all of the modules in the source files are resolved, the `NormalModuleFactory`'s `after-resolve` is tapped into, checking for matching initial requests of `i18n`, and appending a relative loader of `plugin/loader.js` with the specified options. This means that all `i18n/index.js` imports from the previous step will be preprocessed by `plugin/loader.js`.
+2. After all of the modules in the source files are resolved, `NormalModuleFactory`'s `after-resolve` is tapped into, checking for matching initial requests of `i18n`, and appending a relative loader of `plugin/loader.js` with the specified options. This means that all `i18n/index.js` imports from the previous step will be preprocessed by `plugin/loader.js`.
 
-3. This is the cool part. When the loader is consumed in one of the many webpack stages, it reads all localisation files in a specific folder and merges them into a single object. The raw code of `i18n/index.js` is passed into the loader and has special comments of `//OPTIONS//` and `//TRANSLATIONS//` replaced with options and localisation data respectively.
+3. This is the cool part. When the loader is used in one of the stages in webpack, it reads all localisation files in a specific folder and merges them into a single object. The raw code of `i18n/index.js` is passed into the loader and has special comments of `//OPTIONS//` and `//TRANSLATIONS//` replaced with options and localisation data respectively.
 
 4. The remaining stages of the webpack bundling lifecycle happens as per normal. Now we have all localisation data loaded!
 
-## Changes and Challenges
+## Approach
 
-I've learnt that to make the upgrade, I only needed to match the old compiler hooks with the new ones, but for someone who hasn't done any plugin development, this wasn't a straightforward one. The changelog was *massive*! Some of the internal attributes used to make the plugin work was either removed, moved, or modified without mention. 
+To ensure that the changes were correct, I had to fix the tests, which weren't runnable in the first place. If the plugin does not have any tests, **write them before upgrading**! Providing a test harness for the current code ensures that the upgrade won't break anything. You can take reference from the repository to have a rough idea on how the plugin is tested.
 
-Perhaps, the plugin should be rewritten to take advantage of the new structure, but i'm not keen on spending too much time on a small plugin with minimal positives.
+> The first step to upgrading or refactoring *anything* is to ensure that the current business logic does not change, and that can be achieved by having tests.
 
-Changes made were: 
+After verifying the tests, I upgraded the webpack version and ran them again, updating the test webpack configuration along the way.
 
-## Conclusion
-I'm not one who meddles with webpack configurations that much, so this was my first time trying to understand how a plugin actually worked, and upgrading one.
+Naturally, the plugin stopped working after the version upgrade. I identified the LOCs that were affected and spent some time reading through the webpack documentation, changelogs and forums.
 
-Webpack... is powerful. 
+Some of the internal attributes and method calls used that made the plugin work was either removed or moved without mention, as some were deprecated in the previous version. 
 
-It is more or less an open canvas for module bundling, with the entire lifecycle exposed for tapping into. That allows generation of derived assets, transpilation,  
+The hooks were matched and the missing attributes were found quickly with strategic placements of the good ol' `console.log`. The tests were re-run and they were finally passing! You can view the [updated plugin here](https://github.com/causztic/webpack-rails-i18n-js-plugin).
+
+## Thoughts
+
+Webpack... is powerful and very extensible, and that lies the difficulty.
+
+It is more or less an open canvas for module bundling; the entire lifecycle can be tapped into at every step, with many variable and extensible components.
+
+I'm not one who'd meddle with webpack other than simple optimisation and consumer-level plugin usage, so this was my first time trying to understand how a webpack plugin worked, and actually upgrading one. The sheer number of extensible options was overwhelming, but after doing some code discovery, I was able to narrow down the surface to a more manageable one.
