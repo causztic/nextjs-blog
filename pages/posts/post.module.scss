@@ -56,6 +56,13 @@
     @apply text-center;
     font-size: 0.7em;
   }
+
+  li > ul {
+    @apply pl-4;
+    li:before {
+      content: '- '
+    }
+  }
 }
 
 .basic {
