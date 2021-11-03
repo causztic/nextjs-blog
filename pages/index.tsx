@@ -9,7 +9,7 @@ export default function Home(): JSX.Element {
     <Layout home>
       <section className="mt-1 mb-3">
         <p>Software Engineer doing Ruby on Rails, Javascript and some DevOps</p>
-        <p>Fiddling with custom mechanical keyboards and gardening!</p>
+        <p>Currently fiddling with custom mechanical keyboards and HTML5 canvas rendering!</p>
       </section>
       <section>
         <Link href="/posts">
