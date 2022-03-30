@@ -26,7 +26,7 @@ In my head, it read to me like:
 2. `nickname` is validated if nickname is required, and
 3. `real_name` is validated if nickname is *not* required.
 
-I wrote several behavioural tests for the migration scenario, and then subsequently extended `some_scenario`, giving it a more generic name in the process. During the PR, a colleague graciously pointed out the double negatives in my new code, so I promptly changed it:
+I wrote several behavioural tests for the migration scenario, and then subsequently extended `some_scenario`, giving it a more generic name in the process. During the code review, a colleague graciously pointed out the double negatives in my new code, so I promptly changed it:
 
 ~~~ruby
 with_options if: -> { require_presence_validation } do
