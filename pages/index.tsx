@@ -41,6 +41,7 @@ export default function Home(): JSX.Element {
         <h1 className="mb-2">Find me!</h1>
         <a href="https://www.github.com/causztic" target="_blank" rel="noreferrer noopener" className="mr-2">
           <Image
+            className="dark:bg-gray-100"
             src="/images/github-icon.png"
             height={64}
             width={64}

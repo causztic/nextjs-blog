@@ -19,3 +19,10 @@
     @apply whitespace-pre;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  html {
+    @apply bg-gray-800;
+    @apply text-gray-100;
+  }
+}
