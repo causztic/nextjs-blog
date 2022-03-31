@@ -11,7 +11,8 @@
   },
   "resolutions": {
     "node-fetch": "^2.6.7",
-    "nanoid": "^3.1.31"
+    "nanoid": "^3.1.31",
+    "minimist": ">=1.2.6"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
