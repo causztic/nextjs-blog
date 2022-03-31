@@ -37,7 +37,7 @@
   code {
     font-size: 0.8em;
   }
-  
+
   pre {
     @apply my-6;
   }
@@ -68,4 +68,10 @@
 .basic {
   @apply bg-gray-200;
   @apply p-1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .basic {
+    @apply bg-gray-900;
+  }
 }

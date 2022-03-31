@@ -84,6 +84,7 @@ export default function Layout({
           <section className="mt-3">
             <a href="https://www.github.com/causztic" target="_blank" rel="noreferrer noopener" className="mr-2">
               <Image
+                className="dark:bg-gray-100"
                 src="/images/github-icon.png"
                 height={64}
                 width={64}

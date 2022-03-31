@@ -1,5 +1,6 @@
 // tailwind.config.js
 module.exports = {
+  darkMode: 'media',
   purge: {
     content: [
       './pages/**/*.tsx',
