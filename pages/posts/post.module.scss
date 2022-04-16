@@ -66,12 +66,12 @@
 }
 
 .basic {
-  @apply bg-gray-200;
+  @apply bg-slate-200;
   @apply p-1;
 }
 
 @media (prefers-color-scheme: dark) {
   .basic {
-    @apply bg-gray-900;
+    @apply bg-slate-900;
   }
 }

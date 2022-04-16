@@ -17,8 +17,8 @@ export default function Posts({ posts }: { posts: PostTitleData[] }): JSX.Elemen
         <li key={id} className='mb-4'>
           <Link href={`/posts/${id}`}>
             <a>
-              <h2 className="font-bold font-sans text-gray-900 dark:text-gray-100">{title}</h2>
-              <small className="text-gray-600 dark:text-gray-400">{formattedDate}</small>
+              <h2 className="font-bold font-sans text-slate-900 dark:text-slate-100">{title}</h2>
+              <small className="text-slate-600 dark:text-slate-400">{formattedDate}</small>
             </a>
           </Link>
         </li>

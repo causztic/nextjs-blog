@@ -79,29 +79,27 @@ export default function Layout({
         )}
       </header>
       <main className="mt-2">{children}</main>
-      {!home && (
-        <footer className="my-4">
-          <section className="mt-3">
-            <a href="https://www.github.com/causztic" target="_blank" rel="noreferrer noopener" className="mr-2">
-              <Image
-                className="dark:bg-gray-100"
-                src="/images/github-icon.png"
-                height={64}
-                width={64}
-                alt='github'
-              />
-            </a>
-            <a href="https://www.linkedin.com/in/limyaojie">
-              <Image
-                src="/images/linkedin-icon.png"
-                height={64}
-                width={64}
-                alt='linkedin'
-              />
-            </a>
-          </section>
-        </footer>
-      )}
+      <footer className="my-4">
+        <section className="mt-3">
+          <a href="https://www.github.com/causztic" target="_blank" rel="noreferrer noopener" className="mr-2">
+            <Image
+              className="dark:bg-slate-100"
+              src="/images/github-icon.png"
+              height={64}
+              width={64}
+              alt='github'
+            />
+          </a>
+          <a href="https://www.linkedin.com/in/limyaojie">
+            <Image
+              src="/images/linkedin-icon.png"
+              height={64}
+              width={64}
+              alt='linkedin'
+            />
+          </a>
+        </section>
+      </footer>
     </div>
   )
 }
