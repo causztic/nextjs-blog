@@ -90,8 +90,8 @@ export default function Post({ post }: { post: PostData | null }): JSX.Element {
     return (
       <Layout title={title} description={content.split("\n")[0]} images={getImages(thumbnail)} url={setBaseUrl(`/posts/${post.id}`)}>
         <article className="mb-4">
-          <h1 className="font-bold font-sans text-slate-900 dark:text-slate-100">{title}</h1>
-          <section className="post-date text-sm text-slate-600 dark:text-slate-400">{formattedDate}</section>
+          <h1 className="font-bold font-sans text-gray-900 dark:text-gray-100">{title}</h1>
+          <section className="post-date text-sm text-gray-600 dark:text-gray-400">{formattedDate}</section>
           <hr className="my-4" />
           <section className={styles.postContent}>
             <ReactMarkdown rehypePlugins={[rehypeRaw]} components={components}>

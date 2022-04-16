@@ -1,0 +1,12 @@
+.projectList {
+  @apply mb-4;
+
+  a {
+    @apply font-bold;
+    @apply text-blue-400;
+  }
+
+  li {
+    @apply mb-2;
+  }
+}

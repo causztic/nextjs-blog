@@ -1,8 +1,13 @@
 // tailwind.config.js
 module.exports = {
-  content: [
-    './pages/**/*.tsx',
-    './components/**/*.tsx'
-  ],
-  safelist: ['bg-slate-200', 'bg-green-200', 'bg-yellow-200']
+  darkMode: 'media',
+  purge: {
+    content: [
+      './pages/**/*.tsx',
+      './components/**/*.tsx'
+    ],
+    options: {
+      safelist: ['bg-gray-200', 'bg-green-200', 'bg-yellow-200']
+    }
+  }
 }
