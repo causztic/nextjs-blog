@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Tag from '../components/tag'
 import Layout from '../components/layout'
-import styles from './index.module.scss'
 
 export default function Home(): JSX.Element {
   return (
@@ -17,7 +16,7 @@ export default function Home(): JSX.Element {
         </Link>
       </section>
       <hr className="my-4" />
-      <section className={styles.projectList}>
+      <section>
         <h1 className="mb-2">Some of my works</h1>
         <ul>
           <li>
