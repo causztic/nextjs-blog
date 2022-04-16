@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import Layout from '../components/layout'
 import List from '../components/list'
 
@@ -12,12 +11,12 @@ export default function Home(): JSX.Element {
       </section>
       <section>
         <Link href="/posts">
-          <a className="text-2xl underline text-blue-400">Posts</a>
+          <a className="font-bold text-2xl text-blue-400">Posts</a>
         </Link>
       </section>
       <hr className="my-4" />
       <section>
-        <h1 className="mb-2">Some of my works</h1>
+        <h2 className="mb-2">Some open source contributions</h2>
         <List />
       </section>
     </Layout>

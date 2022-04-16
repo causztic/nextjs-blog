@@ -1,5 +1,5 @@
-declare type Color = 'slate' | 'green' | 'yellow'
-declare type TagProps = { text: string, color?: Color }
+export declare type TagColor = 'slate' | 'green' | 'yellow'
+export declare type TagProps = { text: string, color?: TagColor }
 
 export default function Tag({ text, color = 'slate' }: TagProps): JSX.Element {
   // TODO: refactor to prevent tag color from being purged
