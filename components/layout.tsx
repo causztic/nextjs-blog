@@ -17,7 +17,7 @@ const Footer = () => (
           alt='github'
         />
       </a>
-      <a href="https://www.linkedin.com/in/limyaojie">
+      <a href="https://www.linkedin.com/in/limyaojie" target="_blank" rel="noreferrer noopener">
         <Image
           src="/images/linkedin-icon.png"
           height={64}
