@@ -5,7 +5,6 @@ published: true
 tags: ["code", "rails"]
 thumbnail: ["/images/computer-thumbnail.jpg", 1350, 900]
 ---
-
 OK so quick context: there was data required to be copied over from a different source. Empty fields were to be handled due to the legacy nature of the data, so we needed to skip the presence check of some fields while saving them in this business flow.
 
 The existing (obfuscated) piece of validation looks like this:

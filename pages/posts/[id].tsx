@@ -14,7 +14,7 @@ import sql from 'react-syntax-highlighter/dist/cjs/languages/prism/sql'
 import { GetStaticPathsResult, GetStaticPropsResult } from 'next'
 import Link from 'next/link'
 import Tag from '../../components/tag'
-import Layout from '../../components/layout'
+import { Layout } from '../../components/layout'
 import { getAllPostIds, getPostData, PostData } from '../../lib/posts'
 import styles from './post.module.scss'
 
@@ -56,24 +56,18 @@ const components: any = {
   }
 }
 
-const setBaseUrl = (url?: string) => {
-  if (url) {
-    return `https://www.causztic.com${url}`
-  }
-
-  return undefined;
-}
+const setBaseUrl = (url: string) => `https://www.causztic.com${url}`
 
 const getImages = (thumbnail?: [string, number, number]) => {
   if (thumbnail) {
     return [{
-      url: setBaseUrl(thumbnail[0])!,
+      url: setBaseUrl(thumbnail[0]),
       width: thumbnail[1],
       height: thumbnail[2]
     }]
   }
 
-  return undefined;
+  return [];
 }
 
 export default function Post({ post }: { post: PostData | null }): JSX.Element {
@@ -86,7 +80,6 @@ export default function Post({ post }: { post: PostData | null }): JSX.Element {
     </>
   } else {
     const { title, formattedDate, content, tags, thumbnail } = post
-
     return (
       <Layout title={title} description={content.split("\n")[0]} images={getImages(thumbnail)} url={setBaseUrl(`/posts/${post.id}`)}>
         <article className="mb-4">

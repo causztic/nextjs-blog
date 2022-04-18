@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         twitter={{
           handle: '@causztic',
           cardType: 'summary_large_image',
-        }} 
+        }}
         openGraph={{
           url,
           type: 'website',

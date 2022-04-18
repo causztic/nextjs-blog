@@ -1,12 +1,14 @@
 import Link from 'next/link'
-import Layout from '../components/layout'
+import { HomeLayout } from '../components/layout'
 import List from '../components/list'
+
+const description = "Software Engineer doing Ruby on Rails, Javascript and some DevOps"
 
 export default function Home(): JSX.Element {
   return (
-    <Layout home>
+    <HomeLayout>
       <section className="mt-1 mb-3">
-        <p>Software Engineer doing Ruby on Rails, Javascript and some DevOps</p>
+        <p>{description}</p>
         <small>Currently fiddling with custom mechanical keyboards and reading books on system design</small>
       </section>
       <section>
@@ -17,6 +19,6 @@ export default function Home(): JSX.Element {
       <hr className="my-4" />
       <h2 className="mb-2">Some open source contributions</h2>
       <List />
-    </Layout>
+    </HomeLayout>
   )
 }

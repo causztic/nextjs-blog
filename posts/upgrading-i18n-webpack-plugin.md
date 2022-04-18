@@ -4,7 +4,6 @@ date: '2021-10-13'
 published: true
 tags: ["code", "webpack"]
 ---
-
 Recently, one of our Rails applications wanted an upgrade to Webpack 5, for faster compilation times and to deliver smaller asset bundles. We were using a *fairly* [magical but old](https://github.com/chrome/Webpack-rails-i18n-js-plugin) plugin to help us manage localisation. Throughout the lifespan of the application, no one understood how the plugin *really* worked - it was added in a few years back during the days of Webpack 3, patched for Webpack 4 in 2019, and left alone ever since. I took upon the task of upgrading the plugin, and spent some extra time trying to understand how it worked behind the scenes.
 
 ## Structure
@@ -43,7 +42,7 @@ After verifying the tests, I upgraded the Webpack version and ran them again, up
 
 Naturally, the plugin stopped working after the version upgrade. I identified the LOCs that were affected and spent some time reading through the Webpack documentation and forum posts.
 
-Some of the internal attributes and method calls used that made the plugin work was either removed or moved without mention, as some were deprecated in the previous version. 
+Some of the internal attributes and method calls used that made the plugin work was either removed or moved without mention, as some were deprecated in the previous version.
 
 The hooks were matched and the missing attributes were found quickly with strategic placements of the good ol' `console.log`. The tests were re-run to verify that there were no regressions. You can view the [updated plugin here](https://github.com/causztic/Webpack-rails-i18n-js-plugin).
 
