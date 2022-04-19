@@ -9,7 +9,6 @@ import { GetStaticPathsResult, GetStaticPropsResult } from 'next'
 import Link from 'next/link'
 import Tag from '../../components/tag'
 import { getAllPostIds, getPostData, PostData } from '../../lib/posts'
-import styles from './post.module.scss'
 
 
 type Params = { id: string }
@@ -43,7 +42,7 @@ export default function Post({ post }: { post: PostData | null }): JSX.Element {
           <h1 className="font-bold font-sans text-slate-900 dark:text-slate-100">{title}</h1>
           <section className="post-date text-sm text-slate-600 dark:text-slate-400">{formattedDate}</section>
           <hr className="my-4" />
-          <section className={styles.postContent}>
+          <section>
             <ReactMarkdown>
               {content}
             </ReactMarkdown>

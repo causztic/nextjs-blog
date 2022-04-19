@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
-import '../styles/global.scss'
 
 const url = 'https://www.causztic.com/'
 const title = 'Lim Yao Jie'
@@ -17,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
         twitter={{
           handle: '@causztic',
           cardType: 'summary_large_image',
-        }} 
+        }}
         openGraph={{
           url,
           type: 'website',
