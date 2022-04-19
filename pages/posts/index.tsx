@@ -1,6 +1,5 @@
 import { GetStaticPropsResult } from 'next'
 import Link from 'next/link'
-import Layout from '../../components/layout'
 import { getSortedPostsData, PostTitleData } from '../../lib/posts'
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<{ posts: PostTitleData[] }>> {
@@ -11,7 +10,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<{ posts: Po
 }
 
 export default function Posts({ posts }: { posts: PostTitleData[] }): JSX.Element {
-  return <Layout>
+  return <>
     <ul>
       {posts.map(({ id, formattedDate, title }) => (
         <li key={id} className='mb-4'>
@@ -24,5 +23,5 @@ export default function Posts({ posts }: { posts: PostTitleData[] }): JSX.Elemen
         </li>
       ))}
     </ul>
-  </Layout>
+  </>
 }
