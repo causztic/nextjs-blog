@@ -3,7 +3,8 @@ title: Ruby on Rails Gotcha - Object#with_options
 date: '2022-03-30'
 published: true
 tags: ["code", "rails"]
-thumbnail: ["/images/computer-thumbnail.jpg", 1350, 900]
+thumbnail: { url: "/images/computer-thumbnail.jpg", width: 1350, height: 900 }
+summary: "There was data required to be copied over from a different source. Empty fields were to be handled due to the legacy nature of the data, so we needed to skip the presence check of some fields while saving them in this business flow."
 ---
 OK so quick context: there was data required to be copied over from a different source. Empty fields were to be handled due to the legacy nature of the data, so we needed to skip the presence check of some fields while saving them in this business flow.
 
@@ -45,7 +46,7 @@ After an hour, I finally found out the cause of this seemingly weird interaction
 <figure>
   <img src="/images/with-options-screenshot.png" />
 <figcaption>
-  <a href="https://www.rubydoc.info/docs/rails/Object:with_options">https://www.rubydoc.info/docs/rails/Object:with_options</a>
+  <a href="https://www.rubydoc.info/docs/rails/Object:with_options" rel='nofollow noreferrer noopener' target='_blank'>https://www.rubydoc.info/docs/rails/Object:with_options</a>
 </figcaption>
 </figure>
 

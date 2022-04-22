@@ -3,8 +3,11 @@ title: How I upgraded a Webpack 4 plugin to Webpack 5
 date: '2021-10-13'
 published: true
 tags: ["code", "webpack"]
+summary: "Recently, one of our Rails applications wanted an upgrade to Webpack 5, for faster compilation times and to deliver smaller asset bundles."
 ---
-Recently, one of our Rails applications wanted an upgrade to Webpack 5, for faster compilation times and to deliver smaller asset bundles. We were using a *fairly* [magical but old](https://github.com/chrome/Webpack-rails-i18n-js-plugin) plugin to help us manage localisation. Throughout the lifespan of the application, no one understood how the plugin *really* worked - it was added in a few years back during the days of Webpack 3, patched for Webpack 4 in 2019, and left alone ever since. I took upon the task of upgrading the plugin, and spent some extra time trying to understand how it worked behind the scenes.
+Recently, one of our Rails applications wanted an upgrade to Webpack 5, for faster compilation times and to deliver smaller asset bundles.
+
+We were using a *fairly* [magical but old](https://github.com/chrome/Webpack-rails-i18n-js-plugin) plugin to help us manage localisation. Throughout the lifespan of the application, no one understood how the plugin *really* worked - it was added in a few years back during the days of Webpack 3, patched for Webpack 4 in 2019, and left alone ever since. I took upon the task of upgrading the plugin, and spent some extra time trying to understand how it worked behind the scenes.
 
 ## Structure
 

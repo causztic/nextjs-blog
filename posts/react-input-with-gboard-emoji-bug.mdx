@@ -3,7 +3,8 @@ title: Fixing a weird React input bug with Gboard emoji suggestions
 date: '2021-08-20'
 published: true
 tags: ["code", "react"]
-thumbnail: ["/images/mobile-phone-thumbnail.jpeg", 1350, 900]
+thumbnail: { url: "/images/mobile-phone-thumbnail.jpeg", width: 1350, height: 900 }
+summary: "In one of our projects, we have a CurrencyField class component that formats user input, by adding commas to separate the thousands for readability."
 ---
 In one of our projects, we have a `CurrencyField` class component that formats user input, by adding commas to separate the thousands for readability i.e. formatting "1000" to "1,000".
 
@@ -14,13 +15,13 @@ Recently, a quality engineer raised a very interesting ticket - while using the 
     <source src="/videos/react-input-with-gboard-emoji-bug.mp4" />
   </video>
   <figcaption>
-    <a href="https://github.com/causztic/react-testbed/tree/gboard-autocompletion-bug">Sample repo</a>. Notice that there is an extra input as the emoji appears and the next key is pressed.
+    <a href="https://github.com/causztic/react-testbed/tree/gboard-autocompletion-bug" rel='nofollow noreferrer noopener' target='_blank'>Sample repo</a>. Notice that there is an extra input as the emoji appears and the next key is pressed.
   </figcaption>
 </figure>
 
 ## Triage
 
-To isolate the bug's origin, we attempted to replicate this on different mobile phones and browsers. The engineering team was unable to replicate it on our Android devices, and only two people from QA managed to replicate it successfully. It was only after reviewing their screen recordings that I realised a commonality - both had autosuggestions for the 💯 emoji on their keyboard (specifically the Gboard) before the bug triggered. 
+To isolate the bug's origin, we attempted to replicate this on different mobile phones and browsers. The engineering team was unable to replicate it on our Android devices, and only two people from QA managed to replicate it successfully. It was only after reviewing their screen recordings that I realised a commonality - both had autosuggestions for the 💯 emoji on their keyboard (specifically the Gboard) before the bug triggered.
 
 ## Preparation
 
@@ -77,14 +78,3 @@ Doing this improves the UX on mobile as a numeric keyboard will appear, allows u
 ## Some unrelated rambling
 
 While sleuthing around to fix this bug, I also managed to refactor the component from a weird mix of uncontrolled and controlled to a fully controlled one. I will be going through this particular exercise in a future article. Thank you for reading!
-
-
-
-
-
-
-
-
-
-
-
