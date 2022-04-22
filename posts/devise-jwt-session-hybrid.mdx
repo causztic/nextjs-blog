@@ -3,6 +3,7 @@ title: Devise JWT with Sessions Hybrid
 date: '2019-09-20'
 published: true
 tags: ["code", "ruby"]
+summary: "We wanted to create a shared authentication platform with Devise for both API and non-API (vanilla website) usage."
 ---
 So here's the deal: we wanted to create a shared authentication platform with Devise for both API and non-API (vanilla website) usage.
 For the API, we needed a jwt implementation, so:
@@ -72,7 +73,7 @@ Here comes the ceveat!
 We had to either disable **session_storage** or **database_authenticatable**, which were not very feasible options if we were to also allow session-based logins for the website.
 
 1. Disabling **session_storage** would allow JWT to not persist sessions even when no Authorization headers are passed, but would also remove the probability of sessions altogether.
-2. Disabling **database_authenticatable** would make the Users not have a email/password login functionality, which defeats the purpose.</li>
+2. Disabling **database_authenticatable** would make the Users not have a email/password login functionality, which defeats the purpose.
 
 (BTW the code mentioned in [this medium article](https://medium.com/@brentkearney/json-web-token-jwt-and-html-logins-with-devise-and-ruby-on-rails-5-9d5e8195193d) does not actually work if your session happens to persist from the same origin as the author did not disable session_storage.)
 

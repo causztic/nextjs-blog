@@ -43,6 +43,10 @@ export const Post = defineDocumentType(() => ({
       type: 'nested',
       of: Thumbnail,
     },
+    summary: {
+      type: 'string',
+      required: true
+    }
   },
   computedFields: {
     url: {

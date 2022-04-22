@@ -78,7 +78,7 @@ export function Layout({
         </Link>
         <h2>
           <Link href="/">
-            <a className='font-sans'>{name}</a>
+            <a>{name}</a>
           </Link>
         </h2>
       </header>
@@ -104,15 +104,21 @@ export function HomeLayout({ children }: { children: React.ReactNode }): JSX.Ele
         }
       </Script>
       <header>
-        <Image
-          priority
-          className="rounded-full"
-          src="/images/profile.jpg"
-          height={144}
-          width={144}
-          alt={name}
-        />
-        <h1>{name}</h1>
+        <Link href="/">
+          <Image
+            priority
+            className="rounded-full"
+            src="/images/profile.jpg"
+            height={144}
+            width={144}
+            alt={name}
+          />
+        </Link>
+        <h1>
+          <Link href="/">
+            <a>{name}</a>
+          </Link>
+        </h1>
       </header>
       <main className="mt-2">{children}</main>
       <Footer />

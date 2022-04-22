@@ -56,10 +56,10 @@ export default function PostPage({ post }: { post?: Post }): JSX.Element {
       <DefaultErrorPage statusCode={404} />
     </>
   } else {
-    const { title, date, formattedDate, body, tags, thumbnail } = post
+    const { title, date, formattedDate, body, tags, thumbnail, summary } = post
     const MDXContent = useMDXComponent(body.code)
     return (
-      <Layout title={title} description={""} images={getImages(thumbnail)} url={setBaseUrl(post.url)}>
+      <Layout title={title} description={summary} images={getImages(thumbnail)} url={setBaseUrl(post.url)}>
         <article className="mb-4">
           <h1 className="font-bold font-sans text-slate-900 dark:text-slate-100">{title}</h1>
           <time dateTime={date} className="post-date text-sm text-slate-600 dark:text-slate-400">
