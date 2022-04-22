@@ -38,6 +38,15 @@
     font-size: 0.8em;
   }
 
+  *:not(pre) > code {
+    @apply bg-slate-200;
+    @apply p-1;
+
+    @media (prefers-color-scheme: dark) {
+      @apply bg-slate-900;
+    }
+  }
+
   pre {
     @apply my-6;
   }
@@ -62,16 +71,5 @@
     li:before {
       content: '- '
     }
-  }
-}
-
-.basic {
-  @apply bg-slate-200;
-  @apply p-1;
-}
-
-@media (prefers-color-scheme: dark) {
-  .basic {
-    @apply bg-slate-900;
   }
 }
