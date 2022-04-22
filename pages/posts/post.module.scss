@@ -41,6 +41,7 @@
   *:not(pre) > code {
     @apply bg-slate-200;
     @apply p-1;
+    white-space: nowrap;
 
     @media (prefers-color-scheme: dark) {
       @apply bg-slate-900;
