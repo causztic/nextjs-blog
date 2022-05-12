@@ -13,8 +13,6 @@ import { Layout } from '../../components/layout'
 import { allPosts, Post, Thumbnail } from 'contentlayer/generated'
 import styles from './post.module.scss'
 
-import { useMDXComponent } from 'next-contentlayer/hooks'
-
 type Params = { id: string }
 export async function getStaticProps({ params }: { params: Params }): Promise<GetStaticPropsResult<{ post?: Post }>> {
   const post = allPosts.find((post) => post._raw.flattenedPath === params.id)
@@ -56,8 +54,7 @@ export default function PostPage({ post }: { post?: Post }): JSX.Element {
       <DefaultErrorPage statusCode={404} />
     </>
   } else {
-    const { title, date, formattedDate, body, tags, thumbnail, summary } = post
-    const MDXContent = useMDXComponent(body.code)
+    const { title, date, formattedDate, tags, thumbnail, summary } = post
     return (
       <Layout title={title} description={summary} images={getImages(thumbnail)} url={setBaseUrl(post.url)}>
         <article className="mb-4">
@@ -66,9 +63,7 @@ export default function PostPage({ post }: { post?: Post }): JSX.Element {
             {formattedDate}
           </time>
           <hr className="my-4" />
-          <section className={styles.postContent}>
-            <MDXContent />
-          </section>
+          <section className={styles.postContent} dangerouslySetInnerHTML={{ __html: post.body.html }} />
           <section className="tags mt-6">
             {tags.map((tag: string, index: number) => <Tag key={index} text={tag}></Tag>)}
           </section>
