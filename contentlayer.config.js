@@ -1,5 +1,9 @@
 import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
 import rehypePrism from 'rehype-prism-plus'
+import remarkFrontmatter from 'remark-frontmatter'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
 import { format, parseISO } from 'date-fns'
 
 const Thumbnail = defineNestedType(() => ({
@@ -19,8 +23,8 @@ const Thumbnail = defineNestedType(() => ({
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: `**/*.mdx`,
-  contentType: 'mdx',
+  filePathPattern: `**/*.md`,
+  contentType: 'markdown',
   fields: {
     title: {
       type: 'string',
@@ -63,5 +67,12 @@ export const Post = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: 'posts',
   documentTypes: [Post],
-  mdx: { rehypePlugins: [rehypePrism] },
+  markdown: (builder) => {
+    builder
+      .use(remarkFrontmatter)
+      .use(remarkParse)
+      .use(remarkRehype, { allowDangerousHtml: true })
+      .use(rehypePrism)
+      .use(rehypeStringify, { allowDangerousHtml: true })
+  }
 })
