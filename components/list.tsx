@@ -8,7 +8,7 @@ export default function List(): JSX.Element {
 
   return (
     <>
-      <ul className="flex flex-row flex-wrap">
+      <ul className="grid md:grid-cols-3 gap-4 grid-cols-1">
         {items.map((item) => <ListItem key={item.name} {...item} />)}
       </ul>
     </>
@@ -23,12 +23,12 @@ type ListItemProps = {
 
 function ListItem({ name, url, description }: ListItemProps): JSX.Element {
   return (
-    <li className="w-full box-border my-2 pr-2 w-full md:w-1/3">
-      <a className="text-blue-400" href={url} target="_blank" rel="noreferrer noopener">
+    <li className="w-full bg-white dark:bg-slate-700 box-border rounded-lg px-6 py-6 ring-1 ring-slate-900/5 shadow-xl">
+      <a className="text-slate-900 dark:text-blue-300" href={url} target="_blank" rel="noreferrer noopener">
         {name}
       </a>
       <br />
-      <small>{description}</small>
+      <small className="text-slate-500 dark:text-slate-300">{description}</small>
     </li>
   )
 }
