@@ -22,11 +22,13 @@
     "remark-rehype": "^10.1",
     "rehype-raw": "^6.1.1",
     "rehype-stringify": "^9.0.3",
-    "sass": "^1.32.12"
+    "sass": "^1.32.12",
+    "rss": "^1.2.2"
   },
   "devDependencies": {
     "@types/node": "^15.0.1",
     "@types/react": "^17.0.4",
+    "@types/rss": "^0.0.29",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "autoprefixer": "^10.4.4",
