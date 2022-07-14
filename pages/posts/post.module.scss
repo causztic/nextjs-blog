@@ -3,6 +3,9 @@
     @apply underline;
     @apply text-blue-400;
   }
+  sup {
+    @apply mx-1;
+  }
   ol {
     @apply list-decimal;
     @apply py-4;

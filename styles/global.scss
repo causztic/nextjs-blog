@@ -15,9 +15,6 @@
   h3 {
     @apply text-xl;
   }
-  pre code {
-    @apply whitespace-pre;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
