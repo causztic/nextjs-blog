@@ -5,8 +5,9 @@ published: true
 tags: ["code", "rspec", "rails"]
 summary: "Here are some things to take note when using loops in RSpec to DRY"
 ---
+Using loops in RSpec tests is a great way to DRY test cases, but it can result in false positive tests or curious results when done wrongly.. which is not as nice.
 
-Recently, a colleague was extending a feature that had similar functionality across different object types.
+A few days ago, a colleague was extending a feature that had similar functionality across different object types.
 As any good engineer would, they took the opportunity to refactor the test cases, demonstrating the shared behaviour in a clear fashion.
 
 ```ruby
