@@ -7,8 +7,8 @@ summary: "Here are some things to take note when using loops in RSpec to DRY"
 ---
 Using loops in RSpec tests is a great way to DRY test cases, but it can result in false positive tests or curious results when done wrongly.. which is not as nice.
 
-A few days ago, a colleague was extending a feature that had similar functionality across different object types.
-As any good engineer would, they took the opportunity to refactor the test cases, demonstrating the shared behaviour in a clear fashion.
+A few days ago, a colleague was extending a feature that shared similar functionality across different object types.
+As any good engineer would, they took the opportunity to refactor the test cases, demonstrating the shared behaviour in a clear manner.
 
 ```ruby
 let(:resource) { "pear" }
@@ -22,13 +22,13 @@ context "with a certain scenario" do
 end
 ```
 
-This seemed to work well, but they realised that there's a `subject` call earlier that could be used. The test case is then edited to be:
+This seemed to work well, but they realised that there's a `subject` call earlier that could be used:
 
 ```ruby
 it { expect { subject }.to eq(resource) }
 ```
 
-This newly updated test fails for all object types, except for "pear" - which is a curious result!
+The updated test fails for all object types, except for "pear" - which is unexpected.
 
 In order to figure out what is actually going on, we need to look at how RSpec interprets test files.
 There are two scopes in RSpec (at least with 3.11), namely:
@@ -75,7 +75,7 @@ With this new understanding, we can finally fix the issue with:
 end
 ```
 
-Which would look like this on evaluation:
+Which would look like this upon evaluation:
 
 ```ruby
 context "with a certain apple" do
