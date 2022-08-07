@@ -105,6 +105,7 @@ export function HomeLayout({ children }: { children: React.ReactNode }): JSX.Ele
       </Script>
       <header>
         <Link href="/">
+          <a>
           <Image
             priority
             className="rounded-full"
@@ -113,6 +114,7 @@ export function HomeLayout({ children }: { children: React.ReactNode }): JSX.Ele
             width={144}
             alt={name}
           />
+          </a>
         </Link>
         <h1>
           <Link href="/">
