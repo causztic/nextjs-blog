@@ -3,6 +3,7 @@ title: Value Objects in Ruby
 date: '2022-08-28'
 published: true
 tags: ["code", "ruby"]
+thumbnail: { url: "/images/computer-thumbnail.jpg", width: 1350, height: 900 }
 summary: "Value Objects are finally getting first-class representation in Ruby."
 ---
 [Value Objects](https://martinfowler.com/bliki/ValueObject.html) may be coming to [core Ruby soon](https://bugs.ruby-lang.org/issues/16122), so I'd like to share my thoughts and experiences with them.
